@@ -20,12 +20,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.dmoral.toasty.Toasty;
+import me.bakumon.ugank.ConfigManage;
 import me.bakumon.ugank.R;
 import me.bakumon.ugank.base.SwipeBackBaseActivity;
+import me.bakumon.ugank.module.login.LoginActivity;
 import me.bakumon.ugank.utills.AlipayZeroSdk;
 import me.bakumon.ugank.utills.DisplayUtils;
 import me.bakumon.ugank.utills.MDTintUtil;
 import me.bakumon.ugank.widget.AboutDialog;
+import me.bakumon.ugank.widget.CircleImageView;
 
 public class SettingActivity extends SwipeBackBaseActivity implements SettingContract.View, CompoundButton.OnCheckedChangeListener {
 
@@ -47,6 +50,10 @@ public class SettingActivity extends SwipeBackBaseActivity implements SettingCon
     TextView mTvImageQualityTip;
     @BindView(R.id.tv_setting_clean_cache)
     TextView mTvCleanCache;
+    @BindView(R.id.tv_setting_user_name)
+    TextView mTvUserName;
+    @BindView(R.id.iv_setting_user_photo)
+    CircleImageView mCivUserPhone;
     @BindView(R.id.switch_setting_show_launcher_img)
     SwitchCompat mSwitchSettingShowLauncherImg;
     @BindView(R.id.switch_setting_always_show_launcher_img)
@@ -120,6 +127,23 @@ public class SettingActivity extends SwipeBackBaseActivity implements SettingCon
         mSwitchSettingAlwaysShowLauncherImg.setChecked(!mSwitchSettingAlwaysShowLauncherImg.isChecked());
     }
 
+    @OnClick(R.id.iv_setting_user_photo)
+    public void updateUserPhone() {
+
+    }
+
+    @OnClick(R.id.ll_user_info)
+    public void userInfo() {
+        // 如果没登录
+        startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+    }
+
+    @OnClick(R.id.tv_logout)
+    public void logout() {
+        ConfigManage.INSTANCE.setIsLogin(false);
+        finish();
+    }
+
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
         switch (compoundButton.getId()) {
@@ -139,6 +163,7 @@ public class SettingActivity extends SwipeBackBaseActivity implements SettingCon
     @Override
     public void setToolbarBackgroundColor(int color) {
         mAppbarSetting.setBackgroundColor(color);
+        mTvUserName.setTextColor(color);
     }
 
     @Override

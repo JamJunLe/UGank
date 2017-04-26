@@ -21,9 +21,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts"/>
+                android:resource="@xml/shortcuts" />
         </activity>
         <!-- 主页 -->
         <activity android:name=".module.home.HomeActivity" />
@@ -47,6 +48,10 @@
         <!-- 收藏 -->
         <activity
             android:name=".module.favorite.FavoriteActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <!-- 登录 -->
+        <activity
+            android:name=".module.login.LoginActivity"
             android:theme="@style/AppTheme.Transparent" />
     </application>
 

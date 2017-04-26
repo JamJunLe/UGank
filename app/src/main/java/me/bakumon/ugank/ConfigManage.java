@@ -16,12 +16,14 @@ public enum ConfigManage {
     private final String key_banner_url = "keyBannerUrl";
     private final String key_launcher_img_show = "keyLauncherImgShow";
     private final String key_launcher_img_probability_show = "keyLauncherImgProbabilityShow";
+    private final String key_is_login = "keyIsLogin";
 
     private boolean isListShowImg;
     private int thumbnailQuality;
     private String bannerURL;
     private boolean isShowLauncherImg;
     private boolean isProbabilityShowLauncherImg;
+    private boolean isLogin;
 
     public void initConfig(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(spName, Context.MODE_PRIVATE);
@@ -35,6 +37,8 @@ public enum ConfigManage {
         isShowLauncherImg = sharedPreferences.getBoolean(key_launcher_img_show, true);
         // 启动页是否概率出现
         isProbabilityShowLauncherImg = sharedPreferences.getBoolean(key_launcher_img_probability_show, true);
+        // 是否已登录
+        isLogin = sharedPreferences.getBoolean(key_is_login, false);
     }
 
     public boolean isListShowImg() {
@@ -99,6 +103,19 @@ public enum ConfigManage {
         editor.putBoolean(key_launcher_img_probability_show, probabilityShowLauncherImg);
         if (editor.commit()) {
             isProbabilityShowLauncherImg = probabilityShowLauncherImg;
+        }
+    }
+
+    public boolean isLogin() {
+        return isLogin;
+    }
+
+    public void setIsLogin(boolean isLogin) {
+        SharedPreferences sharedPreferences = App.getInstance().getSharedPreferences(spName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key_is_login, isLogin);
+        if (editor.commit()) {
+            this.isLogin = isLogin;
         }
     }
 }
